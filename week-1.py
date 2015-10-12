@@ -22,12 +22,9 @@ import random
 # (how much money each play is worth), as well as a list representing the cards used in the game.
 # To make things easier, we will just use a list 0-9 for the cards.
 
-gameStake = 50  
-cards = range(10)
+class Player:
 
 # Next, let's define a new class to represent each player in the game.
-
-class Player:
     
     # create here two local variables to store a unique ID for each player and the player's current 'pot' of money
     playerID = 5
@@ -36,26 +33,26 @@ class Player:
     # in the __init__() function, use the two input variables to initialize the ID and starting pot of each player
     
     def __init__(self, inputID, startingPot):
-        self.inputID = playerID
-        self.startingPot = pot
+        self.playerID = inputID
+        self.pot = startingPot
         
     # create a function for playing the game. This function should take on input for the card of the dealer.
     # it should then take a random card from 
     
     def play(self, dealerCard):
-        self.playerCard = random
+        self.lastCard = random.choice(cards)
         
         # here we should have a conditional that tests the player's card value against the dealer card
         # and returns a statement saying whether the player won or lost the hand
         # before return the statement, make sure to either add or subtract the stake from the player's pot so that
         # the 'pot' variable tracks the player's money
         
-        if playerCard < dealerCard:
+        if self.lastCard < dealerCard:
             self.pot += gameStake
-            return 'player' + self.playerID + 'wIn', + self.playerCard + 'vs' + self.dealerCard
+            return 'player ' + str(self.playerID) + ' Win, ' + str(self.lastCard) + ' vs ' + str(dealerCard)
         else:
             self.pot -= gameStake
-            return 'player' + self.playerID + 'Lose' + self.playerCard + 'vs' + self.dealerCard
+            return 'player' + str(self.playerID) + 'Lose' + str(self.lastCard) + 'vs' + str(dealerCard)
         
     # create an accessor function to return the current value of the player's pot
     def returnPot(self):
@@ -73,7 +70,6 @@ class Player:
 def playHand(players):
     
     for player in players:
-        dealerCard = random.choice(cards)
         print player.play(random)
         
 # Next we will define a function that will check the balances of each player, and print out a message with the
@@ -82,8 +78,10 @@ def playHand(players):
 def checkBalances(players):
     
     for player in players:
-        print 'player' + self.player.returnID + 'has' + self.player.returnPot + 'left'
+        print 'player ' + str(player.returnID()) + ' has $' + str(player.returnPot()) + 'left.'
   
+gameStake = 50  
+cards = range(10)  
   
 # Now we are ready to start the game. First we create an empy list to store the collection of players in the game
 
